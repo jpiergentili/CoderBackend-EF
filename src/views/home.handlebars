@@ -37,6 +37,7 @@
         <th>Precio</th>
         <th>Categoría</th>
         <th>Stock</th>
+        <th>Agregar a Carrito</th>
         <th>Eliminar</th>
         <th>Actualizar</th>
       </tr>
@@ -50,6 +51,7 @@
           <td>{{this.price}}</td>
           <td>{{this.category}}</td>
           <td>{{this.stock}}</td>
+          <td><button class="btn btn-primary" onclick="addToCart('{{this._id}}')">Agregar</button></td>
           <td><button class="btn btn-danger" onclick="deleteProduct('{{this._id}}')">Eliminar</button></td>
           <td><a href="/api/products/update/{{this._id}}" class="btn btn-warning">Actualizar</a></td>
         </tr>
@@ -93,7 +95,61 @@
   </nav>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+  // Función para agregar un producto a un carrito
+  function addToCart(productId) {
+    fetch('/api/carts/cart-ids')
+      .then(response => response.json())
+      .then(carts => {
+        if (carts.length > 0) {
+          let cartOptions = carts.map(cart => `<option value="${cart._id}">${cart._id}</option>`).join('');
+
+          Swal.fire({
+            title: 'Selecciona un carrito',
+            html: `
+              <select id="cartSelect" class="swal2-input">
+                ${cartOptions}
+              </select>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Agregar al carrito',
+            preConfirm: () => {
+              const selectedCart = document.getElementById('cartSelect').value;
+              return { cartId: selectedCart };
+            }
+          }).then(result => {
+            if (result.isConfirmed) {
+              const cartId = result.value.cartId;
+
+              // Realizar la petición para agregar el producto al carrito
+              fetch(`/api/carts/${cartId}/product/${productId}`, {
+                method: 'POST'
+              })
+                .then(response => {
+                  if (response.ok) {
+                    Swal.fire('Producto agregado', '', 'success');
+                  } else {
+                    Swal.fire('Error', 'No se pudo agregar el producto al carrito', 'error');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error al agregar el producto al carrito:', error);
+                  Swal.fire('Error', 'Hubo un problema al agregar el producto al carrito', 'error');
+                });
+            }
+          });
+        } else {
+          Swal.fire('Error', 'No se encontraron carritos', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener los carritos:', error);
+        Swal.fire('Error', 'Hubo un problema al obtener los carritos', 'error');
+      });
+  }
+
+  // Función para eliminar productos
   function deleteProduct(productId) {
     if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
       fetch(`/api/products/${productId}`, {
