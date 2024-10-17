@@ -5,12 +5,37 @@ const router = Router();
 
 // Ruta para la vista de productos en tiempo real
 router.get('/realtimeproducts', async (req, res) => {
-  const products = await productManager.getProducts();
-  res.render("realTimeProducts", {
-    products,
-    title: "Mercadoliebre",
-    style: "realTimeProducts.css",
-  });
+  const { limit = 10, page = 1, sort, query } = req.query;
+
+  const options = {
+    page: parseInt(page),
+    limit: parseInt(limit),
+    sort: sort ? { price: sort === "asc" ? 1 : -1 } : {} // Ordenar por precio ascendente o descendente
+  };
+
+  try {
+    const filters = query ? { category: { $regex: query, $options: "i" } } : {}; // Filtro por categoría
+    const result = await productModel.paginate(filters, options);  // Usar mongoose-paginate-v2
+
+    // Generar las páginas para mostrar
+    const pages = Array.from({ length: result.totalPages }, (_, index) => ({
+      number: index + 1,
+      active: index + 1 === result.page
+    }));
+
+    res.render("realTimeProducts", {
+      products: result.docs,
+      title: "Mercadoliebre - Tiempo Real",
+      style: "realTimeProducts.css",
+      ...result,  // Pasa toda la información de paginación
+      pages,  // Pasa el array de páginas
+      query,
+      limit,
+      sort
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Error al obtener productos" });
+  }
 });
 
 // Ruta para la vista estática de productos

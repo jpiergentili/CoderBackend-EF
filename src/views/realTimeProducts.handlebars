@@ -1,35 +1,32 @@
 <div class="container mt-4">
-  <!-- Formulario para agregar productos -->
-  <form id="addProductForm" class="mb-4">
+  <h2>Lista de Productos en Tiempo Real</h2>
+
+  <!-- Filtros y Ordenamiento -->
+  <form method="GET" action="/realtimeproducts" id="filtersForm">
     <div class="row mb-3">
-      <div class="col-md-6 mb-2">
-        <input type="text" name="title" class="form-control" placeholder="Título" required />
+      <div class="col-md-3">
+        <input type="text" name="query" class="form-control" placeholder="Buscar por categoría" value="{{query}}">
       </div>
-      <div class="col-md-6 mb-2">
-        <input type="text" name="description" class="form-control" placeholder="Descripción" required />
+      <div class="col-md-2">
+        <select name="limit" class="form-select">
+          <option value="5" {{#if limit}}selected{{/if}}>5 por página</option>
+          <option value="10" {{#if limit}}selected{{/if}}>10 por página</option>
+          <option value="20" {{#if limit}}selected{{/if}}>20 por página</option>
+        </select>
       </div>
-      <div class="col-md-6 mb-2">
-        <input type="text" name="thumbnails" class="form-control" placeholder="URL Foto" required />
+      <div class="col-md-2">
+        <select name="sort" class="form-select">
+          <option value="">Sin ordenar</option>
+          <option value="asc" {{#if sort}}selected{{/if}}>Precio ascendente</option>
+          <option value="desc" {{#if sort}}selected{{/if}}>Precio descendente</option>
+        </select>
       </div>
-      <div class="col-md-6 mb-2">
-        <input type="number" name="price" class="form-control" placeholder="Precio" required />
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
       </div>
     </div>
-    <div class="row mb-3">
-      <div class="col-md-4 mb-2">
-        <input type="number" name="stock" class="form-control" placeholder="Stock" required />
-      </div>
-      <div class="col-md-4 mb-2">
-        <input type="number" name="code" class="form-control" placeholder="Código" required />
-      </div>
-      <div class="col-md-4 mb-2">
-        <input type="text" name="category" class="form-control" placeholder="Categoría" required />
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Agregar Producto</button>
   </form>
 
-  <h2>Lista de Productos</h2>
   <!-- Tabla de productos -->
   <table class="table" style="width:100%">
     <thead>
@@ -41,28 +38,63 @@
         <th>Categoría</th>
         <th>Stock</th>
         <th>Eliminar</th>
+        <th>Actualizar</th>
       </tr>
     </thead>
     <tbody>
       {{#each products}}
         <tr>
-          <td>{{this.id}}</td>
+          <td>{{this._id}}</td>
           <td>{{this.title}}</td>
           <td>{{this.description}}</td>
           <td>{{this.price}}</td>
           <td>{{this.category}}</td>
           <td>{{this.stock}}</td>
           <td>
-            <button class="btn btn-danger delete-btn" data-id="{{this.id}}">Eliminar</button>
+            <button class="btn btn-danger delete-btn" data-id="{{this._id}}">Eliminar</button>
+          </td>
+          <td>
+            <a href="/api/products/update/{{this._id}}" class="btn btn-warning">Actualizar</a>
           </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
+
+  <!-- Paginación -->
+<nav>
+  <ul class="pagination">
+    {{#if hasPrevPage}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{prevPage}}&limit={{limit}}&sort={{sort}}&query={{query}}">Anterior</a>
+      </li>
+    {{else}}
+      <li class="page-item disabled">
+        <a class="page-link">Anterior</a>
+      </li>
+    {{/if}}
+
+    {{#each pages}}
+      <li class="page-item {{#if this.active}}active{{/if}}">
+        <a class="page-link" href="?page={{this.number}}&limit={{../limit}}&sort={{../sort}}&query={{../query}}">{{this.number}}</a>
+      </li>
+    {{/each}}
+
+    {{#if hasNextPage}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{nextPage}}&limit={{limit}}&sort={{sort}}&query={{query}}">Siguiente</a>
+      </li>
+    {{else}}
+      <li class="page-item disabled">
+        <a class="page-link">Siguiente</a>
+      </li>
+    {{/if}}
+  </ul>
+</nav>
+
 </div>
-{{! sweetalert }}
+
+<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{! configuracion de socket.io en el cliente }}
 <script src="/socket.io/socket.io.js"></script>
-{{! logica de la vista }}
 <script src="/js/realTimeProducts.js"></script>

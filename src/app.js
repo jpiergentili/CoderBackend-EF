@@ -5,6 +5,11 @@ import handlebars from "express-handlebars";
 import mongoose from "mongoose";
 import productsRouter from './routes/products.router.js';
 import cartsRouter from './routes/carts.router.js';
+import viewsRouter from './routes/views.router.js';  // Asegúrate de importar el archivo de rutas para vistas
+
+import { configureWebSocket } from './socketManager.js';
+import { Server } from "socket.io";
+import http from 'http';
 
 const uri = 'mongodb+srv://jp2:Q1w2e3r4@jp-backend-coder01.bavi18s.mongodb.net/backendP1-EntregaFinal';
 const app = express();
@@ -20,7 +25,6 @@ const connectDB = async () => {
   }
 };
 
-// Llamar a la función de conexión a la base de datos
 connectDB();
 
 // Middleware
@@ -38,14 +42,10 @@ app.engine("handlebars", handlebars.engine({
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
-// Ruta para la gestión de productos
+// Registrar los routers
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
-
-// Ruta principal
-app.get('/', (req, res) => {
-  res.redirect('/api/products');
-});
+app.use('/', viewsRouter);  // Registrar el viewsRouter aquí
 
 app.get('/carts', async (req, res) => {
   const carts = await cartModel.find();
@@ -58,6 +58,12 @@ app.get('/api/carts/:cid', async (req, res) => {
 });
 
 // Inicializar el servidor http
-const httpServer = app.listen(8080, () => {
+const httpServer = http.createServer(app);
+const io = new Server(httpServer);
+
+// Llamar al manejador de WebSocket con el servidor
+configureWebSocket(io);
+
+httpServer.listen(8080, () => {
   console.log("Servidor escuchando en el puerto 8080");
 });
