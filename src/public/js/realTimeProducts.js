@@ -33,6 +33,80 @@ document.addEventListener("click", (event) => {
   }
 });
 
+// Función para mostrar SweetAlert y agregar producto al carrito
+document.addEventListener("click", async (event) => {
+  if (event.target.classList.contains("add-to-cart-btn")) {
+    const productId = event.target.getAttribute("data-id");
+
+    try {
+      // Obtener los IDs de los carritos disponibles
+      const response = await fetch('/api/carts/cart-ids');
+      const carts = await response.json();
+
+      if (carts.length === 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No hay carritos disponibles",
+        });
+        return;
+      }
+
+      // Crear el dropdown con los IDs de los carritos
+      const cartOptions = carts.map(cart => `<option value="${cart._id}">${cart._id}</option>`).join('');
+
+      // Mostrar el SweetAlert con el dropdown de carritos
+      const { value: selectedCartId } = await Swal.fire({
+        title: 'Selecciona un carrito',
+        html: `
+          <select id="cartSelect" class="swal2-select">
+            ${cartOptions}
+          </select>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Agregar',
+        cancelButtonText: 'Cancelar',
+        preConfirm: () => {
+          const cartId = Swal.getPopup().querySelector('#cartSelect').value;
+          if (!cartId) {
+            Swal.showValidationMessage('Debes seleccionar un carrito');
+          }
+          return cartId;
+        }
+      });
+
+      if (selectedCartId) {
+        // Enviar la solicitud al servidor para agregar el producto al carrito
+        const addProductResponse = await fetch(`/api/carts/${selectedCartId}/product/${productId}`, {
+          method: 'POST',
+        });
+
+        if (addProductResponse.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Producto agregado",
+            text: `Producto agregado exitosamente al carrito ${selectedCartId}`,
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un problema al agregar el producto al carrito",
+          });
+        }
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al obtener los carritos.",
+      });
+    }
+  }
+});
+
 // Actualizar la tabla de productos cuando se actualicen
 socket.on("productsUpdated", (products) => {
   const tableBody = document.querySelector("tbody");
@@ -46,6 +120,9 @@ socket.on("productsUpdated", (products) => {
         <td>${product.price}</td>
         <td>${product.category}</td>
         <td>${product.stock}</td>
+        <td>
+          <button class="btn btn-success add-to-cart-btn" data-id="${product._id}">Agregar</button>
+        </td>
         <td>
           <button class="btn btn-danger delete-btn" data-id="${product._id}">Eliminar</button>
         </td>

@@ -37,6 +37,7 @@
         <th>Precio</th>
         <th>Categoría</th>
         <th>Stock</th>
+        <th>Agregar a Carrito</th>
         <th>Eliminar</th>
         <th>Actualizar</th>
       </tr>
@@ -50,6 +51,9 @@
           <td>{{this.price}}</td>
           <td>{{this.category}}</td>
           <td>{{this.stock}}</td>
+          <td>
+            <button class="btn btn-success add-to-cart-btn" data-id="{{this._id}}">Agregar</button>
+          </td>
           <td>
             <button class="btn btn-danger delete-btn" data-id="{{this._id}}">Eliminar</button>
           </td>

@@ -98,6 +98,65 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     }
 });
 
+// PUT /api/carts/:cid - Actualizar carrito completo con un arreglo de productos
+/* request para hacer con postman: http://localhost:8080/api/carts/67107731758a6a7e52c47c21
+    {
+    "products": [
+        { "productId": "67106bf4758a6a7e52c47bea", "qty": 5 },
+        { "productId": "67106bf4758a6a7e52c47beb", "qty": 2 }
+    ]
+    }
+*/
+router.put('/:cid', async (req, res) => {
+    const { cid } = req.params;
+    const { products } = req.body;  // El arreglo de productos vendrá en el body de la petición.
+
+    // Verificar que el arreglo de productos no esté vacío o que sea válido
+    if (!products || !Array.isArray(products)) {
+        return res.status(400).json({ error: 'El arreglo de productos es inválido o no existe.' });
+    }
+
+    try {
+        // Buscar el carrito por ID
+        const cart = await cartModel.findById(cid);
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado.' });
+        }
+
+        // Validar que cada producto en el arreglo tenga el formato correcto
+        const updatedProducts = [];
+        for (const product of products) {
+            const { productId, qty } = product;
+
+            if (!productId || !qty || qty <= 0) {
+                return res.status(400).json({ error: 'Cada producto debe tener un productId válido y una cantidad mayor que 0.' });
+            }
+
+            // Verificar si el producto existe en la base de datos
+            const existingProduct = await productModel.findById(productId);
+            if (!existingProduct) {
+                return res.status(404).json({ error: `Producto con ID ${productId} no encontrado.` });
+            }
+
+            // Agregar el producto actualizado al arreglo
+            updatedProducts.push({
+                product: productId,
+                qty: qty
+            });
+        }
+
+        // Actualizar los productos en el carrito
+        cart.cartProducts = updatedProducts;
+
+        // Guardar los cambios
+        await cart.save();
+
+        res.json({ message: 'Carrito actualizado correctamente.', cart });
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar el carrito.' });
+    }
+});
+
 // PUT /api/carts/:cid/products/:pid/quantity
 router.put('/:cid/products/:pid/quantity', async (req, res) => {
     const { cid, pid } = req.params;
