@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2>Actualizar Producto</h2>
+  <!-- Formulario para actualizar producto -->
+  <div>
+    Título: <input type="text" id="title" name="title" value="{{product.title}}" class="form-control mb-3"><br>
+    Descripción: <input type="text" id="description" name="description" value="{{product.description}}" class="form-control mb-3"><br>
+    Precio: <input type="number" id="price" name="price" value="{{product.price}}" class="form-control mb-3"><br>
+    Imagen (URL): <input type="text" id="thumbnail" name="thumbnail" value="{{product.thumbnails}}" class="form-control mb-3"><br>
+    Código: <input type="text" id="code" name="code" value="{{product.code}}" class="form-control mb-3"><br>
+    Stock: <input type="number" id="stock" name="stock" value="{{product.stock}}" class="form-control mb-3"><br>
+    Categoría: <input type="text" id="category" name="category" value="{{product.category}}" class="form-control mb-3"><br>
+    <button class="btn btn-primary" onclick="updateProduct('{{product._id}}')">Actualizar</button>
+  </div>
+</div>
+
+<script>
+  function updateProduct(productId) {
+    fetch(`/api/products/${productId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        price: document.getElementById('price').value,
+        thumbnails: document.getElementById('thumbnail').value,
+        code: document.getElementById('code').value,
+        stock: document.getElementById('stock').value,
+        category: document.getElementById('category').value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/api/products';  // Redirige a la lista de productos
+      } else {
+        throw new Error('Error al actualizar el producto.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  }
+</script>
+

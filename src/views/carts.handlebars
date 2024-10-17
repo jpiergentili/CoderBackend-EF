@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Lista de Carritos</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cantidad de productos</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each carts}}
+        <tr>
+          <td>{{this._id}}</td>
+          <td>{{this.first_name}}</td>
+          <td>{{this.last_name}}</td>
+          <td>{{this.cartProducts.length}}</td>
+          <td><a href="/api/carts/{{this._id}}" class="btn btn-info">Detalles</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,452 @@
+[
+	{
+		"title": "Mantecol",
+		"description": "Comida",
+		"price": 300,
+		"thumbnail": "foto",
+		"stock": 50,
+		"code": 3455,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Queso",
+		"description": "Lacteos",
+		"price": 300,
+		"thumbnail": "foto",
+		"stock": 50,
+		"code": 1657,
+		"status": true,
+		"category": "Lácteos"
+	},
+	{
+		"title": "vigueta",
+		"description": "vigueta shap",
+		"price": 22222,
+		"thumbnails": "Foto vigueta",
+		"code": "454365",
+		"stock": 123123,
+		"category": "Construccion",
+		"status": true
+	},
+	{
+		"title": "Tira de asado",
+		"description": "Carne ideal para la parrila",
+		"price": 10000,
+		"thumbnails": "N/D",
+		"code": "6564",
+		"stock": 100,
+		"category": "Carnes",
+		"status": true
+	},
+	{
+		"title": "mouse",
+		"description": "Mouse",
+		"price": 50000,
+		"thumbnails": "Foto",
+		"code": "77777",
+		"stock": 200,
+		"category": "Informatica",
+		"status": true
+	},
+	{
+		"title": "yerba",
+		"description": "conrado 500gr",
+		"price": 5000,
+		"thumbnails": "foto de gaucho",
+		"code": "8888",
+		"stock": 100,
+		"category": "Infusiones",
+		"status": true
+	},
+	{
+		"title": "Laptop HP",
+		"description": "Portátil",
+		"price": 150000,
+		"thumbnail": "foto",
+		"stock": 30,
+		"code": 9001,
+		"status": true,
+		"category": "Informatica"
+	},
+	{
+		"title": "Monitor 24''",
+		"description": "Monitor de 24 pulgadas",
+		"price": 40000,
+		"thumbnail": "foto",
+		"stock": 25,
+		"code": 9002,
+		"status": true,
+		"category": "Informatica"
+	},
+	{
+		"title": "Teclado mecánico",
+		"description": "Teclado gaming",
+		"price": 7000,
+		"thumbnail": "foto",
+		"stock": 100,
+		"code": 9003,
+		"status": true,
+		"category": "Informatica"
+	},
+	{
+		"title": "Café",
+		"description": "Café molido",
+		"price": 800,
+		"thumbnail": "foto",
+		"stock": 500,
+		"code": 1001,
+		"status": true,
+		"category": "Infusiones"
+	},
+	{
+		"title": "Coca-Cola",
+		"description": "Bebida gaseosa",
+		"price": 200,
+		"thumbnail": "foto",
+		"stock": 1000,
+		"code": 1101,
+		"status": true,
+		"category": "Bebidas"
+	},
+	{
+		"title": "Pizza congelada",
+		"description": "Pizza lista para hornear",
+		"price": 1500,
+		"thumbnail": "foto",
+		"stock": 60,
+		"code": 1201,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Helado",
+		"description": "Helado de chocolate",
+		"price": 800,
+		"thumbnail": "foto",
+		"stock": 200,
+		"code": 1301,
+		"status": true,
+		"category": "Postres"
+	},
+	{
+		"title": "Té verde",
+		"description": "Infusión natural",
+		"price": 600,
+		"thumbnail": "foto",
+		"stock": 300,
+		"code": 1401,
+		"status": true,
+		"category": "Infusiones"
+	},
+	{
+		"title": "Galletas Oreo",
+		"description": "Galletas con crema",
+		"price": 350,
+		"thumbnail": "foto",
+		"stock": 200,
+		"code": 1501,
+		"status": true,
+		"category": "Postres"
+	},
+	{
+		"title": "Fideos",
+		"description": "Fideos de trigo",
+		"price": 100,
+		"thumbnail": "foto",
+		"stock": 400,
+		"code": 1601,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Arroz",
+		"description": "Arroz blanco",
+		"price": 80,
+		"thumbnail": "foto",
+		"stock": 600,
+		"code": 1701,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Mermelada",
+		"description": "Mermelada de frutilla",
+		"price": 500,
+		"thumbnail": "foto",
+		"stock": 150,
+		"code": 1801,
+		"status": true,
+		"category": "Postres"
+	},
+	{
+		"title": "Silla ergonómica",
+		"description": "Silla para oficina",
+		"price": 25000,
+		"thumbnail": "foto",
+		"stock": 50,
+		"code": 1901,
+		"status": true,
+		"category": "Muebles"
+	},
+	{
+		"title": "Escritorio",
+		"description": "Escritorio de madera",
+		"price": 35000,
+		"thumbnail": "foto",
+		"stock": 20,
+		"code": 2001,
+		"status": true,
+		"category": "Muebles"
+	},
+	{
+		"title": "Lampara de pie",
+		"description": "Lámpara LED",
+		"price": 8000,
+		"thumbnail": "foto",
+		"stock": 30,
+		"code": 2101,
+		"status": true,
+		"category": "Iluminación"
+	},
+	{
+		"title": "Pollo asado",
+		"description": "Pollo entero listo para asar",
+		"price": 1500,
+		"thumbnail": "foto",
+		"stock": 80,
+		"code": 2201,
+		"status": true,
+		"category": "Carnes"
+	},
+	{
+		"title": "Cerveza artesanal",
+		"description": "Botella de 500ml",
+		"price": 400,
+		"thumbnail": "foto",
+		"stock": 200,
+		"code": 2301,
+		"status": true,
+		"category": "Bebidas"
+	},
+	{
+		"title": "Vino tinto",
+		"description": "Botella de 750ml",
+		"price": 1200,
+		"thumbnail": "foto",
+		"stock": 150,
+		"code": 2401,
+		"status": true,
+		"category": "Bebidas"
+	},
+	{
+		"title": "Agua mineral",
+		"description": "Botella de 1.5L",
+		"price": 100,
+		"thumbnail": "foto",
+		"stock": 1000,
+		"code": 2501,
+		"status": true,
+		"category": "Bebidas"
+	},
+	{
+		"title": "Tablet Samsung",
+		"description": "Pantalla 10 pulgadas",
+		"price": 120000,
+		"thumbnail": "foto",
+		"stock": 15,
+		"code": 2601,
+		"status": true,
+		"category": "Informatica"
+	},
+	{
+		"title": "Impresora láser",
+		"description": "Impresora multifunción",
+		"price": 80000,
+		"thumbnail": "foto",
+		"stock": 10,
+		"code": 2701,
+		"status": true,
+		"category": "Informatica"
+	},
+	{
+		"title": "Sandwich de miga",
+		"description": "Sandwich de jamón y queso",
+		"price": 200,
+		"thumbnail": "foto",
+		"stock": 300,
+		"code": 2801,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Empanada",
+		"description": "Empanada de carne",
+		"price": 150,
+		"thumbnail": "foto",
+		"stock": 400,
+		"code": 2901,
+		"status": true,
+		"category": "Comida"
+	},
+	{
+		"title": "Televisor 55''",
+		"description": "Smart TV UHD",
+		"price": 200000,
+		"thumbnail": "foto",
+		"stock": 20,
+		"code": 3001,
+		"status": true,
+		"category": "Electrónica"
+	},
+	{
+		"title": "Aire acondicionado",
+		"description": "Split frío/calor",
+		"price": 120000,
+		"thumbnail": "foto",
+		"stock": 25,
+		"code": 3101,
+		"status": true,
+		"category": "Electrodomésticos"
+	},
+	{
+		"title": "Heladera",
+		"description": "Heladera con freezer",
+		"price": 180000,
+		"thumbnail": "foto",
+		"stock": 10,
+		"code": 3201,
+		"status": true,
+		"category": "Electrodomésticos"
+	},
+	{
+		"title": "Microondas",
+		"description": "Microondas 30L",
+		"price": 25000,
+		"thumbnail": "foto",
+		"stock": 40,
+		"code": 3301,
+		"status": true,
+		"category": "Electrodomésticos"
+	},
+	{
+		"title": "Cafetera",
+		"description": "Cafetera express",
+		"price": 8000,
+		"thumbnail": "foto",
+		"stock": 50,
+		"code": 3401,
+		"status": true,
+		"category": "Electrodomésticos"
+	},
+	{
+		"title": "Auriculares Bluetooth",
+		"description": "Auriculares inalámbricos",
+		"price": 7000,
+		"thumbnail": "foto",
+		"stock": 60,
+		"code": 3501,
+		"status": true,
+		"category": "Electrónica"
+	},
+	{
+		"title": "Reloj inteligente",
+		"description": "Smartwatch con GPS",
+		"price": 25000,
+		"thumbnail": "foto",
+		"stock": 70,
+		"code": 3601,
+		"status": true,
+		"category": "Electrónica"
+	},
+	{
+		"title": "Zapatillas deportivas",
+		"description": "Zapatillas running",
+		"price": 10000,
+		"thumbnail": "foto",
+		"stock": 90,
+		"code": 3701,
+		"status": true,
+		"category": "Ropa y Accesorios"
+	},
+	{
+		"title": "Camiseta de fútbol",
+		"description": "Camiseta oficial de fútbol",
+		"price": 8500,
+		"thumbnail": "foto",
+		"stock": 100,
+		"code": 3801,
+		"status": true,
+		"category": "Ropa y Accesorios"
+	},
+	{
+		"title": "Pantalones vaqueros",
+		"description": "Pantalones de mezclilla",
+		"price": 12000,
+		"thumbnail": "foto",
+		"stock": 110,
+		"code": 3901,
+		"status": true,
+		"category": "Ropa y Accesorios"
+	},
+	{
+		"title": "Sombrero de paja",
+		"description": "Sombrero de verano",
+		"price": 3000,
+		"thumbnail": "foto",
+		"stock": 120,
+		"code": 4001,
+		"status": true,
+		"category": "Ropa y Accesorios"
+	},
+	{
+		"title": "Botella de agua",
+		"description": "Botella deportiva 1L",
+		"price": 500,
+		"thumbnail": "foto",
+		"stock": 130,
+		"code": 4101,
+		"status": true,
+		"category": "Deportes"
+	},
+	{
+		"title": "Bicicleta",
+		"description": "Bicicleta de montaña",
+		"price": 80000,
+		"thumbnail": "foto",
+		"stock": 20,
+		"code": 4201,
+		"status": true,
+		"category": "Deportes"
+	},
+	{
+		"title": "Raqueta de tenis",
+		"description": "Raqueta profesional",
+		"price": 20000,
+		"thumbnail": "foto",
+		"stock": 50,
+		"code": 4301,
+		"status": true,
+		"category": "Deportes"
+	},
+	{
+		"title": "Balón de fútbol",
+		"description": "Balón oficial de fútbol",
+		"price": 5000,
+		"thumbnail": "foto",
+		"stock": 150,
+		"code": 4401,
+		"status": true,
+		"category": "Deportes"
+	},
+	{
+		"title": "Guantes de boxeo",
+		"description": "Guantes de cuero",
+		"price": 10000,
+		"thumbnail": "foto",
+		"stock": 30,
+		"code": 4501,
+		"status": true,
+		"category": "Deportes"
+	}
+]

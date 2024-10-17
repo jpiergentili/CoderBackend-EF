@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h2>Crear Nuevo Producto</h2>
+  <!-- Formulario para crear un nuevo producto -->
+  <form id="createProductForm">
+    <div class="row mb-3">
+      <div class="col-md-6 mb-2">
+        <input type="text" id="title" name="title" class="form-control" placeholder="Título" required />
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" id="description" name="description" class="form-control" placeholder="Descripción" required />
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" id="thumbnails" name="thumbnails" class="form-control" placeholder="URL de la imagen" required />
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="number" id="price" name="price" class="form-control" placeholder="Precio" required />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6 mb-2">
+        <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock" required />
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" id="code" name="code" class="form-control" placeholder="Código" required />
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" id="category" name="category" class="form-control" placeholder="Categoría" required />
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="createProduct()">Crear Producto</button>
+  </form>
+</div>
+
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function createProduct() {
+    fetch('/api/products', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        thumbnails: document.getElementById('thumbnails').value,
+        price: document.getElementById('price').value,
+        stock: document.getElementById('stock').value,
+        code: document.getElementById('code').value,
+        category: document.getElementById('category').value,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())  // Convertir la respuesta a JSON
+    .then(data => {
+      if (data.error) {
+        // Si hay un error, mostrar SweetAlert con el mensaje de error del servidor
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: data.error,
+          confirmButtonText: 'Aceptar'
+        });
+      } else {
+        // Si es exitoso, vaciar el formulario y mostrar un mensaje de éxito
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('thumbnails').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('stock').value = '';
+        document.getElementById('code').value = '';
+        document.getElementById('category').value = '';
+
+        // Mostrar mensaje de éxito con SweetAlert2
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto agregado',
+          text: 'El producto se ha agregado correctamente.',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al crear el producto.',
+        confirmButtonText: 'Aceptar'
+      });
+    });
+  }
+</script>

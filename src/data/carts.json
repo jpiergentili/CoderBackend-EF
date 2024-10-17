@@ -1,0 +1,73 @@
+[
+	{
+	  "first_name": "Juan",
+	  "last_name": "Perez",
+	  "cartProducts": [
+		{
+		  "product": "67106bf4758a6a7e52c47be8",
+		  "qty": 2
+		},
+		{
+		  "product": "67106bf4758a6a7e52c47be9",
+		  "qty": 1
+		}
+	  ]
+	},
+	{
+	  "first_name": "Maria",
+	  "last_name": "Lopez",
+	  "cartProducts": [
+		{
+		  "product": "67106bf4758a6a7e52c47bea",
+		  "qty": 4
+		},
+		{
+		  "product": "67106bf4758a6a7e52c47beb",
+		  "qty": 2
+		}
+	  ]
+	},
+	{
+	  "first_name": "Carlos",
+	  "last_name": "Ramirez",
+	  "cartProducts": [
+		{
+		  "product": "67106bf4758a6a7e52c47bec",
+		  "qty": 1
+		},
+		{
+		  "product": "67106bf4758a6a7e52c47bed",
+		  "qty": 5
+		}
+	  ]
+	},
+	{
+	  "first_name": "Ana",
+	  "last_name": "Garcia",
+	  "cartProducts": [
+		{
+		  "product": "67106bf4758a6a7e52c47bee",
+		  "qty": 3
+		},
+		{
+		  "product": "67106bf4758a6a7e52c47bef",
+		  "qty": 6
+		}
+	  ]
+	},
+	{
+	  "first_name": "Pedro",
+	  "last_name": "Sanchez",
+	  "cartProducts": [
+		{
+		  "product": "67106bf4758a6a7e52c47bf0",
+		  "qty": 2
+		},
+		{
+		  "product": "67106bf4758a6a7e52c47bf1",
+		  "qty": 4
+		}
+	  ]
+	}
+  ]
+  

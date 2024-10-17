@@ -1,0 +1,115 @@
+<div class="container mt-4">
+  <h2>Lista de Productos</h2>
+
+  <!-- Filtros y Ordenamiento -->
+  <form method="GET" action="/api/products" id="filtersForm">
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <input type="text" name="query" class="form-control" placeholder="Buscar por categoría" value="{{query}}">
+      </div>
+      <div class="col-md-2">
+        <select name="limit" class="form-select">
+          <option value="5" {{#if limit}}selected{{/if}}>5 por página</option>
+          <option value="10" {{#if limit}}selected{{/if}}>10 por página</option>
+          <option value="20" {{#if limit}}selected{{/if}}>20 por página</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select name="sort" class="form-select">
+          <option value="">Sin ordenar</option>
+          <option value="asc" {{#if sort}}selected{{/if}}>Precio ascendente</option>
+          <option value="desc" {{#if sort}}selected{{/if}}>Precio descendente</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Tabla de productos -->
+  <table class="table" style="width:100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>Stock</th>
+        <th>Eliminar</th>
+        <th>Actualizar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+        <tr>
+          <td>{{this._id}}</td>
+          <td>{{this.title}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.price}}</td>
+          <td>{{this.category}}</td>
+          <td>{{this.stock}}</td>
+          <td><button class="btn btn-danger" onclick="deleteProduct('{{this._id}}')">Eliminar</button></td>
+          <td><a href="/api/products/update/{{this._id}}" class="btn btn-warning">Actualizar</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <nav>
+    <ul class="pagination">
+      {{#if hasPrevPage}}
+        <li class="page-item">
+          <a class="page-link" href="{{prevLink}}">Anterior</a>
+        </li>
+      {{else}}
+        <li class="page-item disabled">
+          <a class="page-link">Anterior</a>
+        </li>
+      {{/if}}
+
+      {{#each pagination.pages}}
+        {{#if this.isEllipsis}}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+        {{else if this.isCurrent}}
+          <li class="page-item active"><span class="page-link">{{this.page}}</span></li>
+        {{else}}
+          <li class="page-item"><a class="page-link" href="{{this.link}}">{{this.page}}</a></li>
+        {{/if}}
+      {{/each}}
+
+      {{#if hasNextPage}}
+        <li class="page-item">
+          <a class="page-link" href="{{nextLink}}">Siguiente</a>
+        </li>
+      {{else}}
+        <li class="page-item disabled">
+          <a class="page-link">Siguiente</a>
+        </li>
+      {{/if}}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  function deleteProduct(productId) {
+    if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+      fetch(`/api/products/${productId}`, {
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          throw new Error('Error al eliminar el producto');
+        }
+      })
+      .catch(error => {
+        alert('Error al eliminar el producto');
+        console.error('Error:', error);
+      });
+    }
+  }
+</script>
